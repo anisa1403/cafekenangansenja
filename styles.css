@@ -1,0 +1,80 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background: url("img/login.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+}
+
+.login-container {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 30px 25px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.input-group input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+.input-group button {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #923d12; /* Warna coklat */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.input-group button:hover {
+  background-color: #b2633f; /* Warna coklat lebih terang */
+}
+
+.input-group button:active {
+  background-color: #5c3317; /* Warna coklat lebih gelap */
+}

@@ -68,6 +68,72 @@ document.addEventListener("alpine:init", () => {
   });
 });
 
+// form validation
+// form validation
+const checkoutButton = document.querySelector(".checkout-button");
+checkoutButton.disabled = true;
+
+const form = document.querySelector("#checkoutForm");
+
+form.addEventListener("keyup", function () {
+  let allFieldsFilled = true;
+  for (let i = 0; i < form.elements.length; i++) {
+    if (form.elements[i].value.trim() === "") {
+      allFieldsFilled = false;
+      break;
+    }
+  }
+
+  if (allFieldsFilled) {
+    checkoutButton.disabled = false;
+    checkoutButton.classList.remove("disabled");
+  } else {
+    checkoutButton.disabled = true;
+    checkoutButton.classList.add("disabled");
+  }
+});
+
+// kirim data ketika tombol checkout di klik
+checkoutButton.addEventListener("click", async function (e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const data = new URLSearchParams(formData);
+  const objData = Object.fromEntries(data);
+
+  //minta transaction token menggunakan ajax / fetch
+  try {
+    const response = await fetch("php/placeOrder.php", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const token = await response.text();
+    //console.log(token);
+    window.snap.pay(token);
+  } catch (err) {
+    console.log("Error:", err.message);
+  }
+});
+
+// format pesan WhatsApp
+const formatMessage = (obj) => {
+  return `Data Customer
+Nama: ${obj.name}
+Email: ${obj.email}
+No HP: ${obj.phone}
+
+Data Pesanan
+${JSON.parse(obj.items)
+  .map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)})`)
+  .join("\n")}
+TOTAL: ${rupiah(obj.total)}
+Terima Kasih.`;
+};
+
 // konversi ke Rupiah
 const rupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
